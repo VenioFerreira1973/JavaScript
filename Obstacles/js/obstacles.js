@@ -41,7 +41,7 @@ function BarrierPair(barrierWidth, breach, y) {
 }
 
 
-function Barriers(barrierWidth, barrierHeigth, breach, espace, notifyPoint, Speed) {
+function Barriers(barrierWidth, barrierHeigth, breach, espace, notifyPoint, speed) {
     this.pairs = [
         new BarrierPair(barrierWidth, breach, barrierHeigth - espace * 4),
         new BarrierPair(barrierWidth, breach, barrierHeigth - espace * 3),
@@ -52,7 +52,7 @@ function Barriers(barrierWidth, barrierHeigth, breach, espace, notifyPoint, Spee
 
     this.animate = () => {
         this.pairs.forEach(pair => {
-            pair.setY(pair.getY() + Speed.getSpeed())
+            pair.setY(pair.getY() + speed.getSpeed())
 
             //where the element out of game area
             if (pair.getY() - 400 > pair.getBarrierHeigth()) {
@@ -60,7 +60,7 @@ function Barriers(barrierWidth, barrierHeigth, breach, espace, notifyPoint, Spee
                 pair.drawBreach()
             }
             const meio = barrierHeigth / 2
-            const crossMiddle = pair.getY() + Speed.getSpeed() >= meio
+            const crossMiddle = pair.getY() + speed.getSpeed() >= meio
                 && pair.getY() < meio
             if (crossMiddle) {
                 notifyPoint()
@@ -278,7 +278,7 @@ function Obstacles() {
         gameArea.appendChild(airplane.element)
 
         const barriers = new Barriers(barrierWidth, barrierHeigth, 350, 800,
-            () => progress.updatePoints(++points), progress.Speed)
+            () => progress.updatePoints(++points), progress.speed)
 
         barriers.pairs.forEach(pair => gameArea.appendChild(pair.element))
 
